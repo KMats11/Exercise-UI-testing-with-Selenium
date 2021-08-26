@@ -5,18 +5,6 @@ from pages.get_in_touch_page import GetInTouchPage
 from pages.locators import MainPageLocators
 
 
-@pytest.mark.case3
-def test_get_in_touch(browser):
-    link = "https://blog.griddynamics.com/"
-    page = MainPage(browser, link)
-    page.open()
-    page.open_getintouch_page()
-    getintouch_page = GetInTouchPage(browser, browser.current_url)
-    getintouch_page.should_be_contact_us_page()
-    getintouch_page.fill_user_info()
-    getintouch_page.should_be_inactive_contact_button()
-
-
 @pytest.mark.case1
 def test_text_about_director_presented(browser):
     link = "https://blog.griddynamics.com/"
@@ -29,7 +17,7 @@ def test_text_about_director_presented(browser):
 
 
 @pytest.mark.case2
-def test_cloud_devops(browser):
+def test_more_than_one_article_in_topic(browser):
     link = "https://blog.griddynamics.com/"
     page = MainPage(browser, link)
     page.open()
@@ -38,3 +26,15 @@ def test_cloud_devops(browser):
     page.reset_filters()
     page.should_be_different_titles()
     page.should_be_more_than_one_article(MainPageLocators.ARTICLES)
+
+
+@pytest.mark.case3
+def test_get_in_touch_contact_button_inabled(browser):
+    link = "https://blog.griddynamics.com/"
+    page = MainPage(browser, link)
+    page.open()
+    page.open_getintouch_page()
+    getintouch_page = GetInTouchPage(browser, browser.current_url)
+    getintouch_page.should_be_contact_us_page()
+    getintouch_page.fill_user_info()
+    getintouch_page.should_be_inactive_contact_button()
