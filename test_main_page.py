@@ -24,6 +24,7 @@ def test_more_than_one_article_in_topic(browser):
     link = "https://blog.griddynamics.com/"
     page = MainPage(browser, link)
     page.open()
+    page.is_element_present(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
     page.select_filter_by_topic()
     page.should_be_more_than_one_article(MainPageLocators.ARTICLES_CLOUDDEVOPS)
     page.reset_filters()

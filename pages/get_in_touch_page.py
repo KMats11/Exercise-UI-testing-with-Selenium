@@ -1,13 +1,16 @@
+import allure
 from .base_page import BasePage
 from .locators import GetInTouchLocators
 
 
 class GetInTouchPage(BasePage):
 
+    @allure.step('3')
     def should_be_contact_us_page(self):
         # проверка на корректный url адрес
-        assert "contact" in self.browser.current_url, "NO contact us url"
+        assert "contact" in self.browser.current_url, "NOT contact us url"
 
+    @allure.step('4,5,6')
     def fill_user_info(self):
         input1 = self.browser.find_element(*GetInTouchLocators.REGISTER_NAME)
         input1.send_keys('Anna')
@@ -25,6 +28,7 @@ class GetInTouchPage(BasePage):
         i_allow_checkbox = self.browser.find_element(*GetInTouchLocators.I_ALLOW_CHECKBOX)
         i_allow_checkbox.click()
 
+    @allure.step('7')
     def should_be_inactive_contact_button(self):
         contact_button = self.browser.find_element(*GetInTouchLocators.CONTACT_BUTTON)
         assert not contact_button.is_enabled(), "contact button should be inactive"

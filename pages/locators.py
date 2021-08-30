@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 class MainPageLocators():
     ABOUT_BUTTON = (By.XPATH, "//a[text()=' About ']")
     FILTER_SELECT_BY_ARTICLES = (By.XPATH, "//div[@id='typelist']")  # "//span[@class='selected'][text()='Articles']")
-    FILTER_SELECT_BY_TOPIC = (By.XPATH, "//div[@id='topiclist']")  # "//span[@class='selected'][text()='All topics']"
+    FILTER_SELECT_BY_TOPIC = (By.XPATH, "//div[@id='topiclist']/div/span[@class='selected']")  # "//span[@class='selected'][text()='All topics']"
     FILTER_SELECT_CLOUDDEVOPS = (By.XPATH, "//span[text()='Cloud and DevOps']")
     FILTER_RESET_ARTICLES = (By.XPATH, "//span[text()='Articles']")
     FILTER_RESET_TOPICS = (By.XPATH, "//span[text()='All topics']")
