@@ -6,8 +6,7 @@ from pages.get_in_touch_page import GetInTouchPage
 from pages.locators import MainPageLocators
 
 
-@allure.story('Verify that information about Leonard Livschitz is right')
-@pytest.mark.case1
+@allure.title('Verify that information about Leonard Livschitz is right')
 def test_text_about_director_presented(browser):
     link = "https://blog.griddynamics.com/"
     page = MainPage(browser, link)
@@ -18,8 +17,7 @@ def test_text_about_director_presented(browser):
     about_page.should_be_about_text()
 
 
-@allure.story('Verify that topic filter is working and there more than one article in some topic')
-@pytest.mark.case2
+@allure.title('Verify that topic filter is working and there more than one article in some topic')
 def test_more_than_one_article_in_topic(browser):
     link = "https://blog.griddynamics.com/"
     page = MainPage(browser, link)
@@ -32,8 +30,7 @@ def test_more_than_one_article_in_topic(browser):
     page.should_be_more_than_one_article(MainPageLocators.ARTICLES)
 
 
-@allure.story('Verify that if not all required text fields are filled,contact button is inactive')
-@pytest.mark.case3
+@allure.title('Verify that if not all required text fields are filled,contact button is inactive')
 def test_get_in_touch_contact_button_inabled(browser):
     link = "https://blog.griddynamics.com/"
     page = MainPage(browser, link)
