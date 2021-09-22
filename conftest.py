@@ -1,15 +1,18 @@
+import sys
 import pytest
 from selenium import webdriver
 import logging
 
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 @pytest.fixture(scope="function")
 def browser():
     """start browser for each test"""
-    logging.info('start chrome browser for test')
+    logger.info('\nstart chrome browser for test')
     browser = webdriver.Chrome()
     yield browser
-    logging.info('quit browser')
+    logger.info('\nquit browser')
     browser.quit()
