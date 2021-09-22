@@ -12,7 +12,7 @@ class MainPageLocators():
     FIRST_ARTICLE_CLOUDDEVOPS = (By.XPATH, "//section[@class='domainblock cardright all cloud-and-devops']//article[1]//h4[1]")
     ARTICLES_CLOUDDEVOPS = (By.XPATH, "//section[@class='domainblock cardright all cloud-and-devops']//article")
     ARTICLES = (By.XPATH, "//article[1]")
-    GET_IN_TOUCH_BUTTON = (By.XPATH, "//a[@aria-label='Get in touch button'][1]")
+    GET_IN_TOUCH_BUTTON = (By.XPATH, "//a[@class='contact-button']") # //a[@aria-label='Get in touch button'][1] this selector isn't working properly
 
 
 class AboutPageLocators():
@@ -24,8 +24,8 @@ class GetInTouchLocators():
     REGISTER_NAME = (By.XPATH, "//input[@placeholder='First name*']")
     REGISTER_LASTNAME = (By.XPATH, "//input[@placeholder='Last name*']")
     REGISTER_EMAIL = (By.XPATH, "//input[@placeholder='E-mail*']")
-    REGISTER_HOW_HEAR = (By.XPATH, "//gd-select[@formcontrolname='aboutUs']")
-    REGISTER_HOW_HEAR_ONLINE_ADS = (By.XPATH, "//gd-select-option[text()=' Online Ads ']")
+    REGISTER_HOW_HEAR = (By.XPATH, "//gd-select-legacy[@placeholder='How did you hear about us?']")
+    REGISTER_HOW_HEAR_ONLINE_ADS = (By.XPATH, "//gd-select-option-legacy[text()=' Online Ads ']")
     I_HAVE_READ_CHECKBOX = (By.XPATH, "//span[text()=' I have read and accepted the ']")
     I_ALLOW_CHECKBOX = (By.XPATH, "//span[text()=' I allow Grid Dynamics to contact me. ']")
     CONTACT_BUTTON = (By.XPATH, "//button [@title='Contact']")
