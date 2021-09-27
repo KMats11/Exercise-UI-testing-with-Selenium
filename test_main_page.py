@@ -3,8 +3,7 @@ import pytest
 from pages.about_page import AboutPage
 from pages.main_page import MainPage
 from pages.get_in_touch_page import GetInTouchPage
-from pages.locators import MainPageLocators
-
+from pages.locators import MainPageLocators, AboutPageLocators
 
 URL = "https://blog.griddynamics.com/"
 
@@ -15,7 +14,7 @@ def test_text_about_director_presented(browser):
     page.open()
     page.open_about_page()
     about_page = AboutPage(browser, browser.current_url)
-    about_page.open_text_about()
+    about_page.open_text_about(*AboutPageLocators.LEONARD_LIVSCHITZ_NAME)
     about_page.should_be_about_text()
 
 

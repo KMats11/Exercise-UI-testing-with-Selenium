@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators():
+class MainPageLocators:
     ABOUT_BUTTON = (By.XPATH, "//a[text()=' About ']")
     FILTER_SELECT_BY_ARTICLES = (By.XPATH, "//div[@id='typelist']")  # "//span[@class='selected'][text()='Articles']")
     FILTER_SELECT_BY_TOPIC = (By.XPATH, "//div[@id='topiclist']/div/span[@class='selected']")  # "//span[@class='selected'][text()='All topics']"
@@ -12,15 +12,15 @@ class MainPageLocators():
     FIRST_ARTICLE_CLOUDDEVOPS = (By.XPATH, "//section[@class='domainblock cardright all cloud-and-devops']//article[1]//h4[1]")
     ARTICLES_CLOUDDEVOPS = (By.XPATH, "//section[@class='domainblock cardright all cloud-and-devops']//article")
     ARTICLES = (By.XPATH, "//article[1]")
-    GET_IN_TOUCH_BUTTON = (By.XPATH, "//a[@class='contact-button']") # //a[@aria-label='Get in touch button'][1] this selector isn't working properly
+    GET_IN_TOUCH_BUTTON = (By.XPATH, "//span[@class='ui-button-wrapper ui-button-block']") # //a[@aria-label='Get in touch button'][1] this selector isn't working properly
 
 
-class AboutPageLocators():
+class AboutPageLocators:
     LEONARD_LIVSCHITZ_NAME = (By.XPATH, "//div[text()='Leonard Livschitz']")
     LEONARD_LIVSCHITZ_INFO_TEXT = (By.XPATH, "//p/span")
 
 
-class GetInTouchLocators():
+class GetInTouchLocators:
     REGISTER_NAME = (By.XPATH, "//input[@placeholder='First name*']")
     REGISTER_LASTNAME = (By.XPATH, "//input[@placeholder='Last name*']")
     REGISTER_EMAIL = (By.XPATH, "//input[@placeholder='E-mail*']")

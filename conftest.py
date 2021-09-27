@@ -11,8 +11,8 @@ logger.addHandler(logging.StreamHandler(sys.stdout))
 @pytest.fixture(scope="function")
 def browser():
     """start browser for each test"""
-    logger.info('\nstart chrome browser for test')
+    logger.info('start chrome browser for test')
     browser = webdriver.Chrome()
     yield browser
-    logger.info('\nquit browser')
+    logger.info('quit browser')
     browser.quit()
