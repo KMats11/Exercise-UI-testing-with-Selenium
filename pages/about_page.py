@@ -15,9 +15,8 @@ class AboutPage(BasePage):
         Keyword arguments:
         how -- method to find an element
         what -- locator of an element on the page"""
-        director_name = self.browser.find_element(how, what)
         logger.info("click on name to open text about")
-        director_name.click()
+        BasePage.click_on_element(self, how, what, "director_name", 10)
 
     def should_be_about_text(self):
         """Check is there expected text in the 'About text'."""

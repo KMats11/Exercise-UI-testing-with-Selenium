@@ -19,11 +19,10 @@ def test_text_about_director_presented(browser):
 
 
 @allure.title('Verify that topic filter is working and there more than one article in some topic')
-@pytest.mark.xfail(reason="the element - filter by 'All Topics' - on the page is not clickable any more")
+# @pytest.mark.xfail(reason="the element - filter by 'All Topics' - on the page is not clickable any more")
 def test_more_than_one_article_in_topic(browser):
     page = MainPage(browser, URL)
     page.open()
-    page.is_element_present(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
     page.select_filter_by_topic()
     page.should_be_more_than_one_article(MainPageLocators.ARTICLES_CLOUDDEVOPS)
     page.reset_filters()

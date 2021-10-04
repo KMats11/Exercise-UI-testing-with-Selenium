@@ -1,7 +1,7 @@
 import logging
 import sys
 from .base_page import BasePage
-from .locators import GetInTouchLocators
+from .locators import GetInTouchLocators, MainPageLocators
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -25,19 +25,15 @@ class GetInTouchPage(BasePage):
         input3 = self.browser.find_element(*GetInTouchLocators.REGISTER_EMAIL)
         logger.info("fill e-mail form with 'annasmith@griddynamics.com'")
         input3.send_keys('annasmith@griddynamics.com')
-        how_hear_list = self.browser.find_element(*GetInTouchLocators.REGISTER_HOW_HEAR)
         logger.info("click on 'How did you hear about us?'")
-        how_hear_list.click()
-        online_ads_option = self.browser.find_element(*GetInTouchLocators.REGISTER_HOW_HEAR_ONLINE_ADS)
+        BasePage.click_on_element(self, *GetInTouchLocators.REGISTER_HOW_HEAR, "how_hear_list", 10)
         logger.info("click on 'Online Ads'")
-        online_ads_option.click()
+        BasePage.click_on_element(self, *GetInTouchLocators.REGISTER_HOW_HEAR_ONLINE_ADS, "online_ads_option", 10)
 
-        i_have_read_checkbox = self.browser.find_element(*GetInTouchLocators.I_HAVE_READ_CHECKBOX)
         logger.info("Click on checkbox 'I have read and accepted the Terms & Conditions and Privacy Policy'")
-        i_have_read_checkbox.click()
-        i_allow_checkbox = self.browser.find_element(*GetInTouchLocators.I_ALLOW_CHECKBOX)
+        BasePage.click_on_element(self, *GetInTouchLocators.I_HAVE_READ_CHECKBOX, "i_have_read_checkbox", 10)
         logger.info("Click on checkbox 'I allow Grid Dynamics to contact me'")
-        i_allow_checkbox.click()
+        BasePage.click_on_element(self, *GetInTouchLocators.I_ALLOW_CHECKBOX, "i_allow_checkbox", 10)
 
     def should_be_inactive_contact_button(self):
         """Check if the 'Contact' button is inactive."""

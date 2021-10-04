@@ -1,6 +1,9 @@
 import logging
 import sys
 import allure
+from selenium.webdriver import ActionChains
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from .base_page import BasePage
 from .locators import MainPageLocators
 from selenium.common.exceptions import NoSuchElementException
@@ -13,15 +16,14 @@ logger.addHandler(logging.StreamHandler(sys.stdout))
 class MainPage(BasePage):
     def open(self):
         """Open page by url."""
-        logger.info("opening url")
+        logger.info("open url")
         self.browser.get(self.url)
 
     def open_about_page(self):
         """Open page 'About' by clicking the button."""
-        logger.info("finding element ABOUT_BUTTON")
-        button_about = self.browser.find_element(*MainPageLocators.ABOUT_BUTTON)
-        logger.info("clicking the button About")
-        button_about.click()
+        logger.info("find element ABOUT_BUTTON")
+        BasePage.click_on_element(self, *MainPageLocators.ABOUT_BUTTON, "button_about", 10)
+        logger.info("click the button About")
 
     def is_element_present(self, how, what):
         """Check is there an element on the page.
@@ -39,14 +41,15 @@ class MainPage(BasePage):
 
     def select_filter_by_topic(self):
         """Filter articles on the page by topic."""
+        self.is_element_present(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
         filter_topic = self.browser.find_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
-        self.browser.execute_script("return arguments[0].scrollIntoView(true);", filter_topic)
-        logger.info("clicking on Filter by topic")
-        filter_topic.click()
+        ActionChains(self.browser).move_to_element(filter_topic).perform()
+        BasePage.click_on_element(self, *MainPageLocators.FILTER_SELECT_BY_TOPIC, "filter_topic", 10)
+        logger.info("click on Filter by topic")
         select_topic = self.browser.find_element(*MainPageLocators.FILTER_SELECT_CLOUDDEVOPS)
-        self.browser.execute_script("return arguments[0].scrollIntoView(true);", select_topic)
-        logger.info("clicking on Filter 'Cloud and devops'")
-        select_topic.click()
+        ActionChains(self.browser).move_to_element(select_topic).perform()
+        BasePage.click_on_element(self, *MainPageLocators.FILTER_SELECT_CLOUDDEVOPS, "select_topic", 10)
+        logger.info("click on Filter 'Cloud and devops'")
 
     def should_be_more_than_one_article(self, locator):
         """Check is there more than one article on the page."""
@@ -56,18 +59,16 @@ class MainPage(BasePage):
 
     def reset_filters(self):
         """Set filters for articles on the first position."""
-        article = self.browser.find_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
-        logger.info("clicking on 'Filter by topic'")
-        article.click()
-        reset_article = self.browser.find_element(*MainPageLocators.FILTER_RESET_ARTICLES)
-        logger.info("clicking on 'All topics' filter to reset filter")
-        reset_article.click()
-        topic = self.browser.find_element(*MainPageLocators.FILTER_SELECT_BY_ARTICLES)
-        logger.info("clicking on 'Filter by article'")
-        topic.click()
-        reset_topic = self.browser.find_element(*MainPageLocators.FILTER_RESET_TOPICS)
-        logger.info("clicking on Articles to reset filter")
-        reset_topic.click()
+
+        logger.info("click on 'Filter by topic'")
+        BasePage.click_on_element(self, *MainPageLocators.FILTER_SELECT_BY_ARTICLES, "article", 10)
+        logger.info("click on 'All topics' filter to reset filter")
+        BasePage.click_on_element(self, *MainPageLocators.FILTER_RESET_ARTICLES, "reset_article", 10)
+
+        logger.info("click on 'Filter by article'")
+        BasePage.click_on_element(self, *MainPageLocators.FILTER_SELECT_BY_TOPIC, "topic", 10)
+        logger.info("click on Articles to reset filter")
+        BasePage.click_on_element(self, *MainPageLocators.FILTER_RESET_TOPICS, "reset_topic", 10)
 
     def should_be_different_titles(self):
         """Check that titles of two articles are different."""
@@ -79,7 +80,6 @@ class MainPage(BasePage):
 
     def open_getintouch_page(self):
         """Open 'Get in touch' page."""
-        getintouch_about = self.browser.find_element(*MainPageLocators.GET_IN_TOUCH_BUTTON)
         logger.info("clicking on Get In Touch button")
         with allure.step("opening Contacts page"):
-            getintouch_about.click()
+            BasePage.click_on_element(self, *MainPageLocators.GET_IN_TOUCH_BUTTON, "getintouch_about", 10)
