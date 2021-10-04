@@ -1,5 +1,8 @@
 import logging
 import sys
+
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from .base_page import BasePage
 from .locators import GetInTouchLocators, MainPageLocators
 
@@ -26,9 +29,9 @@ class GetInTouchPage(BasePage):
         logger.info("fill e-mail form with 'annasmith@griddynamics.com'")
         input3.send_keys('annasmith@griddynamics.com')
         logger.info("click on 'How did you hear about us?'")
-        BasePage.click_on_element(self, *GetInTouchLocators.REGISTER_HOW_HEAR, "how_hear_list", 10)
+        self.click_on_element(*GetInTouchLocators.REGISTER_HOW_HEAR, "how_hear_list", 10)
         logger.info("click on 'Online Ads'")
-        BasePage.click_on_element(self, *GetInTouchLocators.REGISTER_HOW_HEAR_ONLINE_ADS, "online_ads_option", 10)
+        self.click_on_element(*GetInTouchLocators.REGISTER_HOW_HEAR_ONLINE_ADS, "online_ads_option", 10)
 
         logger.info("Click on checkbox 'I have read and accepted the Terms & Conditions and Privacy Policy'")
         BasePage.click_on_element(self, *GetInTouchLocators.I_HAVE_READ_CHECKBOX, "i_have_read_checkbox", 10)

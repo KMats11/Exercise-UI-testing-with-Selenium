@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 class MainPageLocators:
     ABOUT_BUTTON = (By.XPATH, "//a[text()=' About ']")
     FILTER_SELECT_BY_ARTICLES = (By.XPATH, "//div[@id='typelist']")  # "//span[@class='selected'][text()='Articles']")
-    FILTER_SELECT_BY_TOPIC = (By.XPATH, "//div[@id='topiclist']")# /div/span[@class='selected']")  # "//span[@class='selected'][text()='All topics']"
+    FILTER_SELECT_BY_TOPIC = (By.XPATH, "//div[@id='topiclist']/div")  # "//span[@class='selected'][text()='All topics']"
     FILTER_SELECT_CLOUDDEVOPS = (By.XPATH, "//span[text()='Cloud and DevOps']")
     FILTER_RESET_ARTICLES = (By.XPATH, "//span[text()='Articles']")
     FILTER_RESET_TOPICS = (By.XPATH, "//span[text()='All topics']")
@@ -26,7 +26,11 @@ class GetInTouchLocators:
     REGISTER_EMAIL = (By.XPATH, "//input[@placeholder='E-mail*']")
     REGISTER_HOW_HEAR = (By.XPATH, "//gd-select-legacy[@placeholder='How did you hear about us?']")
     REGISTER_HOW_HEAR_ONLINE_ADS = (By.XPATH, "//gd-select-option-legacy[text()=' Online Ads ']")
-    I_HAVE_READ_CHECKBOX = (By.XPATH, "//span[text()=' I have read and accepted the ']")
+
+    I_HAVE_READ_CHECKBOX = (By.XPATH, "//span[@class='gd-checkbox-field-legacy__icon']")
+    # Here locator "//span[text()=' I have read and accepted the ']"
+    # is not suitable because it opens 'Terms & Conditions' link in the checkbox text
+
     I_ALLOW_CHECKBOX = (By.XPATH, "//span[text()=' I allow Grid Dynamics to contact me. ']")
     CONTACT_BUTTON = (By.XPATH, "//button [@title='Contact']")
 

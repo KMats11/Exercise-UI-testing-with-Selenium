@@ -22,7 +22,7 @@ class MainPage(BasePage):
     def open_about_page(self):
         """Open page 'About' by clicking the button."""
         logger.info("find element ABOUT_BUTTON")
-        BasePage.click_on_element(self, *MainPageLocators.ABOUT_BUTTON, "button_about", 10)
+        self.click_on_element(*MainPageLocators.ABOUT_BUTTON, "button_about", 10)
         logger.info("click the button About")
 
     def is_element_present(self, how, what):
@@ -41,8 +41,8 @@ class MainPage(BasePage):
 
     def select_filter_by_topic(self):
         """Filter articles on the page by topic."""
-        self.is_element_present(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
         filter_topic = self.browser.find_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
+        self.is_element_present(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
         ActionChains(self.browser).move_to_element(filter_topic).perform()
         BasePage.click_on_element(self, *MainPageLocators.FILTER_SELECT_BY_TOPIC, "filter_topic", 10)
         logger.info("click on Filter by topic")
