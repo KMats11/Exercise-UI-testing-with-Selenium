@@ -1,7 +1,6 @@
 import logging
 import sys
 import time
-
 import allure
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
@@ -51,15 +50,15 @@ class MainPage(BasePage):
         scroll_y_by = desired_y - current_y
         self.browser.execute_script("window.scrollBy(0, arguments[0]);", scroll_y_by)
 
-    def select_filter_by_topic(self):
+    def select_filter_by_topic(self, topic_locator):
         """Filter articles on the page by topic."""
         self.is_element_present(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
         self.scroll_to_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
         time.sleep(3)
         self.click_on_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC, "filter_topic", 10)
-        select_topic = self.browser.find_element(*MainPageLocators.FILTER_SELECT_CLOUDDEVOPS)
+        select_topic = self.browser.find_element(*topic_locator)
         ActionChains(self.browser).move_to_element(select_topic).perform()
-        self.click_on_element(*MainPageLocators.FILTER_SELECT_CLOUDDEVOPS, "select_topic 'Cloud and devops'", 10)
+        self.click_on_element(*topic_locator, "select_topic 'Cloud and devops'", 10)
 
     def should_be_more_than_one_article(self, locator):
         """Check is there more than one article on the page."""
