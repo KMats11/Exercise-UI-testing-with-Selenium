@@ -1,5 +1,7 @@
 import logging
 import sys
+import time
+
 import allure
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
@@ -41,13 +43,19 @@ class MainPage(BasePage):
                 return False
             return True
 
+    def scroll_to_element(self, how, what):
+        element = self.browser.find_element(how, what)
+        desired_y = (element.size['height'] / 2) + element.location['y']
+        current_y = (self.browser.execute_script('return window.innerHeight') / 2) + self.browser.execute_script(
+            'return window.pageYOffset')
+        scroll_y_by = desired_y - current_y
+        self.browser.execute_script("window.scrollBy(0, arguments[0]);", scroll_y_by)
+
     def select_filter_by_topic(self):
         """Filter articles on the page by topic."""
-        filter_topic = self.browser.find_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
         self.is_element_present(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
-
-        # self.browser.execute_script("return arguments[0].scrollIntoView(true);", filter_topic)
-        ActionChains(self.browser).move_to_element_with_offset(filter_topic, 5, 5)
+        self.scroll_to_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
+        time.sleep(3)
         self.click_on_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC, "filter_topic", 10)
         select_topic = self.browser.find_element(*MainPageLocators.FILTER_SELECT_CLOUDDEVOPS)
         ActionChains(self.browser).move_to_element(select_topic).perform()

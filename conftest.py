@@ -14,7 +14,7 @@ def browser():
     logger.info('start chrome browser for test')
     options = webdriver.ChromeOptions()
     options.add_argument("--start-maximized")
-    options.add_argument('window-size=1920,1080')
+    options.add_argument('window-size=1024,768')
     browser = webdriver.Chrome(options=options)
     yield browser
     logger.info('quit browser')
