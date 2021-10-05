@@ -28,15 +28,13 @@ class GetInTouchPage(BasePage):
         input3 = self.browser.find_element(*GetInTouchLocators.REGISTER_EMAIL)
         logger.info("fill e-mail form with 'annasmith@griddynamics.com'")
         input3.send_keys('annasmith@griddynamics.com')
-        logger.info("click on 'How did you hear about us?'")
-        self.click_on_element(*GetInTouchLocators.REGISTER_HOW_HEAR, "how_hear_list", 10)
-        logger.info("click on 'Online Ads'")
-        self.click_on_element(*GetInTouchLocators.REGISTER_HOW_HEAR_ONLINE_ADS, "online_ads_option", 10)
+        self.click_on_element(*GetInTouchLocators.REGISTER_HOW_HEAR, "'How did you hear about us?' list", 10)
+        self.click_on_element(*GetInTouchLocators.REGISTER_HOW_HEAR_ONLINE_ADS, "'Online Ads' option", 10)
 
-        logger.info("Click on checkbox 'I have read and accepted the Terms & Conditions and Privacy Policy'")
-        BasePage.click_on_element(self, *GetInTouchLocators.I_HAVE_READ_CHECKBOX, "i_have_read_checkbox", 10)
-        logger.info("Click on checkbox 'I allow Grid Dynamics to contact me'")
-        BasePage.click_on_element(self, *GetInTouchLocators.I_ALLOW_CHECKBOX, "i_allow_checkbox", 10)
+        BasePage.click_on_element(self, *GetInTouchLocators.I_HAVE_READ_CHECKBOX,
+                                  "checkbox 'I have read and accepted the Terms & Conditions and Privacy Policy'", 10)
+        BasePage.click_on_element(self, *GetInTouchLocators.I_ALLOW_CHECKBOX,
+                                  "checkbox 'I allow Grid Dynamics to contact me'", 10)
 
     def should_be_inactive_contact_button(self):
         """Check if the 'Contact' button is inactive."""
