@@ -35,30 +35,20 @@ class MainPage(BasePage):
             try:
                 logger.info(f"Check is element {what} present on the page")
                 WebDriverWait(self.browser, 10).until(
-                    EC.presence_of_element_located((how, what))
+                    EC.visibility_of_element_located((how, what))
                 )
                 self.browser.find_element(how, what)
             except NoSuchElementException:
                 return False
             return True
 
-    def scroll_to_element(self, how, what):
-        element = self.browser.find_element(how, what)
-        desired_y = (element.size['height'] / 2) + element.location['y']
-        current_y = (self.browser.execute_script('return window.innerHeight') / 2) + self.browser.execute_script(
-            'return window.pageYOffset')
-        scroll_y_by = desired_y - current_y
-        self.browser.execute_script("window.scrollBy(0, arguments[0]);", scroll_y_by)
-
     def select_filter_by_topic(self, topic_locator):
         """Filter articles on the page by topic."""
+        filter_topic = self.browser.find_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
         self.is_element_present(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
-        self.scroll_to_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC)
-        time.sleep(3)
-        self.click_on_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC, "filter_topic", 10)
+        self.browser.execute_script("arguments[0].click();", filter_topic)
         select_topic = self.browser.find_element(*topic_locator)
-        ActionChains(self.browser).move_to_element(select_topic).perform()
-        self.click_on_element(*topic_locator, "select_topic 'Cloud and devops'", 10)
+        self.browser.execute_script("arguments[0].click();", select_topic)
 
     def should_be_more_than_one_article(self, locator):
         """Check is there more than one article on the page."""
@@ -68,12 +58,15 @@ class MainPage(BasePage):
 
     def reset_filters(self):
         """Set filters for articles on the first position."""
+        filter_article = self.browser.find_element(*MainPageLocators.FILTER_SELECT_BY_ARTICLES)
+        self.browser.execute_script("arguments[0].click();", filter_article)
+        reset_article = self.browser.find_element(*MainPageLocators.FILTER_RESET_ARTICLES)
+        self.browser.execute_script("arguments[0].click();", reset_article)
 
-        self.click_on_element(*MainPageLocators.FILTER_SELECT_BY_ARTICLES, "article", 10)
-        self.click_on_element(*MainPageLocators.FILTER_RESET_ARTICLES, "'All articles' reset_article", 10)
-
-        self.click_on_element(*MainPageLocators.FILTER_SELECT_BY_TOPIC, "topic", 10)
-        self.click_on_element(*MainPageLocators.FILTER_RESET_TOPICS, "'All topics' reset_topic", 10)
+        filter_topic = self.browser.find_element(*MainPageLocators.FILTER_SELECT_BY_ARTICLES)
+        self.browser.execute_script("arguments[0].click();", filter_topic)
+        reset_topic = self.browser.find_element(*MainPageLocators.FILTER_RESET_ARTICLES)
+        self.browser.execute_script("arguments[0].click();", reset_topic)
 
     def should_be_different_titles(self):
         """Check that titles of two articles are different."""
