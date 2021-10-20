@@ -32,5 +32,5 @@ class GetInTouchLocators:
     # is not suitable because it opens 'Terms & Conditions' link in the checkbox text
 
     I_ALLOW_CHECKBOX = (By.XPATH, "//span[text()=' I allow Grid Dynamics to contact me. ']")
-    CONTACT_BUTTON = (By.XPATH, "//button [@title='Contact']")
+    CONTACT_BUTTON = (By.XPATH, "//button [@class='ng-tns-c30-3 ui-button-standard ui-button-disabled ui-button ui-button-size-default ng-star-inserted']")
 
