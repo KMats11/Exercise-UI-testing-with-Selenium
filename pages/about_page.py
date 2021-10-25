@@ -1,7 +1,7 @@
 import logging
 import sys
-from .base_page import BasePage
-from .locators import AboutPageLocators
+from base_page import BasePage
+from locators import AboutPageLocators
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
